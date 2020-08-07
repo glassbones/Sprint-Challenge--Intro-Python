@@ -1,6 +1,25 @@
+import csv
+
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
-
+"""
+class City:
+    def __init__(self, city, state_name, county_name, lat, lng, population, density, timezone, zips):
+        self.name = city
+        self.state_name = state_name
+        self.county_name = county_name
+        self.lat = lat
+        self.lon = lng
+        self.population = population
+        self.density = density
+        self.timezone = timezone
+        self.zips = zips
+"""
+class City:
+    def __init__(self, city, lat, lng):
+        self.name = city
+        self.lat = lat
+        self.lon = lng
 
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
@@ -14,6 +33,17 @@
 #
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
+
+
+"""
+with open('src\cityreader\cities.csv', newline='') as data:
+    lines = csv.DictReader(data)
+    cities = [City(row['city'], row['state_name'], row['county_name'], float(row['lat']), float(row['lng']), row['population'], row['density'], row['timezone'], row['zips']) for row in lines]
+
+for c in cities:
+  print(c.name, c.lat, c.lon)
+"""
+
 cities = []
 
 def cityreader(cities=[]):
@@ -21,14 +51,18 @@ def cityreader(cities=[]):
   # Ensure that the lat and lon valuse are all floats
   # For each city record, create a new City instance and add it to the 
   # `cities` list
+
+  with open('src\cityreader\cities.csv', newline='') as data:
+    lines = csv.DictReader(data)
+    cities = [City(row['city'], float(row['lat']), float(row['lng'])) for row in lines]
     
     return cities
 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(c)
+for c in cityreader(cities):
+    print(c.name, c.lat, c.lon)
 
 # STRETCH GOAL!
 #
