@@ -1,5 +1,3 @@
-# Write classes for the following class hierarchy:
-#
 #  [Vehicle]->[FlightVehicle]->[Starship]
 #      |                |
 #      v                v
@@ -7,13 +5,42 @@
 #   |       |
 #   v       v
 # [Car]  [Motorcycle]
-#
-# Each class can simply "pass" for its body. The exercise is about setting up
-# the hierarchy.
-#
-# e.g.
-#
-# class Whatever:
-#     pass
-#
-# Put a comment noting which class is the base class
+
+
+# Parent-------------------------------------------------------------
+class Vehicle:
+    def __init__(self):
+        pass
+
+
+# Gen 1 Child-------------------------------------------------------
+class GroundVehicle(Vehicle):
+    def __init__(self):
+        pass
+
+
+# Gen 2 Children ---------------------------------------------------
+class Car(GroundVehicle):
+    def __init__(self):
+        pass
+
+class Motorcycle(GroundVehicle):
+    def __init__(self):
+        pass
+
+
+# Gen 1 Child-------------------------------------------------------
+class FlightVehicle(Vehicle):
+    def __init__(self):
+        pass
+
+# Gen 2 Children-----------------------------------------------------
+class Airplane(FlightVehicle):
+    def __init__(self):
+        pass
+
+class Starship(FlightVehicle):
+    def __init__(self):
+        pass
+
+
