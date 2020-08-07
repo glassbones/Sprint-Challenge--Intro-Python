@@ -97,7 +97,24 @@ for c in cityreader(cities):
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
-  within = []
+  if lat1 > lat2:
+    maxLat = lat1
+    minLat = lat2
+  else:
+    maxLat = lat2
+    minLat = lat1
+
+  if lon1 > lon2:
+    maxLon = lon1
+    minLon = lon2
+  else:
+    maxLon = lon2
+    minLon = lon1
+
+  with open('src\cityreader\cities.csv', newline='') as data:
+    lines = csv.DictReader(data)
+    #lol there has to be a better way
+    within = [City(row['city'], float(row['lat']), float(row['lng'])) for row in lines if (float(row['lat']) >= minLat and float(row['lat']) <= maxLat ) and (float(row['lng']) >= minLon and float(row['lng']) <= maxLon)]
   
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
